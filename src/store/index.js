@@ -10,5 +10,8 @@ const useStore = create(
       removeAllBears: () => set({ bears: 0 }),
       updateBears: (newBears) => set({ bears: newBears }),
     })),
+    {
+      name: "posta-web-storage",
+    },
   ),
 );

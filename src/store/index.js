@@ -1,12 +1,14 @@
-// Load dependencies
-import { registerStore } from '@wordpress/data';
+import { create } from "zustand";
+import { immer } from "zustand/middleware/immer";
+import { persist } from "zustand/middleware";
 
-import reducer from './reducer';
-import * as actions from './actions';
-import * as selectors from './selectors';
-
-registerStore( 'react-example/counters', {
-	actions,
-	reducer,
-	selectors,
-} );
+const useStore = create(
+  persist(
+    immer((set) => ({
+      bears: 0,
+      increasePopulation: () => set((state) => ({ bears: state.bears + 1 })),
+      removeAllBears: () => set({ bears: 0 }),
+      updateBears: (newBears) => set({ bears: newBears }),
+    })),
+  ),
+);
